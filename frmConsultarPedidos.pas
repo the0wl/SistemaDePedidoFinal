@@ -29,7 +29,6 @@ type
     btNovo: TPanel;
     btExcluir: TPanel;
     pnFiltros: TPanel;
-    checkAtivarFiltros: TCheckBox;
     edFiltroDataInicial: TMaskEdit;
     edFiltroDataFinal: TMaskEdit;
     lbFiltroDataInicial: TLabel;
@@ -40,6 +39,8 @@ type
     cbFiltroSituacao: TComboBox;
     lbFiltroTipo: TLabel;
     cbFiltroTipo: TComboBox;
+    btFiltroFiltrar: TButton;
+    cbHabilitarFiltros: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure Sair(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -48,6 +49,8 @@ type
     procedure Novo(Sender: TObject);
     procedure Alterar(Sender: TObject);
     procedure checkAtivarFiltrosClick(Sender: TObject);
+    procedure btFiltroFiltrarClick(Sender: TObject);
+    procedure cbHabilitarFiltrosClick(Sender: TObject);
   private
     VetorPedidos: TList<TPedido>;
 
@@ -91,9 +94,8 @@ begin
   Height := 360;
   Width  := 640;
 
-  checkAtivarFiltros.Checked := False;
-  edFiltroDataInicial.Text   := DateToStr(Now());
-  edFiltroDataFinal.Text     := DateToStr(Now());
+  edFiltroDataInicial.Text   := FormatDateTime('DD/MM/YYYY', Now());
+  edFiltroDataFinal.Text     := FormatDateTime('DD/MM/YYYY', Now());
   CarregaCampoCliente(1);
   CarregaCampoTipo('V');
   CarregaCampoSituacao(1);
@@ -147,9 +149,15 @@ begin
   cbFiltroTipo.ItemIndex := wItem;
 end;
 
+procedure TfConsultarPedidos.cbHabilitarFiltrosClick(Sender: TObject);
+begin
+  pnFiltros.Enabled := cbHabilitarFiltros.Checked;
+end;
+
 procedure TfConsultarPedidos.checkAtivarFiltrosClick(Sender: TObject);
 begin
   BuscarPedidos;
+  AtualizarInformacoesDaGradeDePedidos;
 end;
 
 procedure TfConsultarPedidos.CarregaCampoSituacao(pSituacao: Integer);
@@ -188,7 +196,7 @@ var
   wObservacao: String;
   wFiltros: String;
 begin
-  if checkAtivarFiltros.Checked then
+  if cbHabilitarFiltros.Checked then
     wFiltros := RetornaFiltrosDeBusca
   else
     wFiltros := '';
@@ -234,6 +242,12 @@ begin
   end;
 end;
 
+procedure TfConsultarPedidos.btFiltroFiltrarClick(Sender: TObject);
+begin
+  BuscarPedidos;
+  AtualizarInformacoesDaGradeDePedidos;
+end;
+
 function TfConsultarPedidos.RetornaFiltrosDeBusca: String;
 var
   wFiltroData: String;
@@ -241,8 +255,8 @@ var
   wFiltroSituacao: String;
   wFiltroTipo: String;
 begin
-  wFiltroData      := 'DATA BETWEEN ''' + StringData(edFiltroDataInicial.Text) + ''' AND ' +
-                      '''' + StringData(edFiltroDataFinal.Text) + ''' ';
+  wFiltroData      := '(DATA BETWEEN ''' + StringData(edFiltroDataInicial.Text) + ''' AND ' +
+                      '''' + StringData(edFiltroDataFinal.Text) + ''') ';
   wFiltroCliente   := 'CODCLIENTE = ' + RetornaCodCliente;
   wFiltroSituacao  := 'SITUACAO = ' + RetornaSituacao;
   wFiltroTipo      := 'TIPO = ''' + RetornaTipoPedido + '''';
@@ -310,14 +324,14 @@ begin
     AdicionarLinhaNaGradeDePedidos(i + 1, wPedido);
   end;
 
-  gdListaPedidos.RowCount := Max(VetorPedidos.Count + 1, 2);
+  gdListaPedidos.RowCount := Max(VetorPedidos.Count + 1, 1);
 end;
 
 procedure TfConsultarPedidos.AdicionarLinhaNaGradeDePedidos(pSequencial: Integer; pPedido: TPedido);
 begin
   gdListaPedidos.Cells[GRID_PEDIDO_SEQUENCIAL, pSequencial]       := pSequencial.ToString;
   gdListaPedidos.Cells[GRID_PEDIDO_NUMERO, pSequencial]           := pPedido.Numero.ToString;
-  gdListaPedidos.Cells[GRID_PEDIDO_DATA, pSequencial]             := DateToStr(pPedido.Data);
+  gdListaPedidos.Cells[GRID_PEDIDO_DATA, pSequencial]             := FormatDateTime('DD/MM/YYYY', pPedido.Data);
   gdListaPedidos.Cells[GRID_PEDIDO_CODIGO_CLIENTE, pSequencial]   := pPedido.Cliente.Codigo.ToString;
   gdListaPedidos.Cells[GRID_PEDIDO_NOME_CLIENTE, pSequencial]     := pPedido.Cliente.Nome;
   gdListaPedidos.Cells[GRID_PEDIDO_SITUACAO, pSequencial]         := pPedido.TextoSituacao;
@@ -659,9 +673,9 @@ end;
 
 function TfConsultarPedidos.RetornaSituacao: String;
 begin
-  if cbFiltroTipo.Text = 'Pendente' then
+  if cbFiltroSituacao.Text = 'Pendente' then
     Result := '1'
-  else if cbFiltroTipo.Text = 'Finalizado' then
+  else if cbFiltroSituacao.Text = 'Finalizado' then
     Result := '2'
   else
     Result := '1';

@@ -48,7 +48,7 @@ begin
 
   queryUsuarios.Open;
 
-  wSenhaInformada := UpperCase(THashMD5.GetHashString('1234'));
+  wSenhaInformada := UpperCase(THashMD5.GetHashString(edSenha.Text));
   wSenha := queryUsuarios.FieldByName('SENHA').AsString;
 
   if wSenha = wSenhaInformada then

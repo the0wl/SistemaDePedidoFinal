@@ -651,6 +651,9 @@ var
   wQtdTotal: Double;
   wValorTotal: Double;
 begin
+  wQtdTotal := 0;
+  wValorTotal := 0;
+
   for item in VetorItens do
   begin
     wQtdTotal    := wQtdTotal + item.Quantidade;

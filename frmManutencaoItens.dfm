@@ -1,9 +1,11 @@
 object fManutencaoItens: TfManutencaoItens
   Left = 0
   Top = 0
+  BorderIcons = []
+  BorderStyle = bsSingle
   Caption = 'Manuten'#231#227'o de itens'
-  ClientHeight = 347
-  ClientWidth = 370
+  ClientHeight = 357
+  ClientWidth = 380
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,13 +20,14 @@ object fManutencaoItens: TfManutencaoItens
   object pnMenu: TPanel
     Left = 0
     Top = 0
-    Width = 370
+    Width = 380
     Height = 68
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 370
     object btCancelar: TPanel
-      Left = 302
+      Left = 312
       Top = 0
       Width = 68
       Height = 68
@@ -41,9 +44,10 @@ object fManutencaoItens: TfManutencaoItens
       ParentFont = False
       TabOrder = 0
       OnClick = Cancelar
+      ExplicitLeft = 302
     end
     object btGravar: TPanel
-      Left = 234
+      Left = 244
       Top = 0
       Width = 68
       Height = 68
@@ -60,17 +64,19 @@ object fManutencaoItens: TfManutencaoItens
       ParentFont = False
       TabOrder = 1
       OnClick = Gravar
+      ExplicitLeft = 234
     end
   end
   object pnEsquerdo: TPanel
     Left = 0
     Top = 68
     Width = 185
-    Height = 279
+    Height = 289
     Align = alLeft
     BevelOuter = bvNone
     ShowCaption = False
     TabOrder = 1
+    ExplicitHeight = 279
     object pnNumeroItem: TPanel
       Left = 0
       Top = 108
@@ -264,11 +270,12 @@ object fManutencaoItens: TfManutencaoItens
     Left = 185
     Top = 68
     Width = 185
-    Height = 279
+    Height = 289
     Align = alLeft
     BevelOuter = bvNone
     ShowCaption = False
     TabOrder = 2
+    ExplicitHeight = 279
     object pnQuantidade: TPanel
       Left = 0
       Top = 0

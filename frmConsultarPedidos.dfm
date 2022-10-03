@@ -20,9 +20,9 @@ object fConsultarPedidos: TfConsultarPedidos
   TextHeight = 13
   object gdListaPedidos: TStringGrid
     Left = 0
-    Top = 209
+    Top = 211
     Width = 595
-    Height = 167
+    Height = 165
     Align = alClient
     BorderStyle = bsNone
     Color = clBtnFace
@@ -32,8 +32,8 @@ object fConsultarPedidos: TfConsultarPedidos
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goFixedRowDefAlign]
     ScrollBars = ssVertical
     TabOrder = 0
-    ExplicitTop = 68
-    ExplicitHeight = 241
+    ExplicitTop = 209
+    ExplicitHeight = 167
   end
   object pnMenu: TPanel
     Left = 0
@@ -61,9 +61,6 @@ object fConsultarPedidos: TfConsultarPedidos
       ParentFont = False
       TabOrder = 0
       OnClick = Sair
-      ExplicitLeft = 526
-      ExplicitTop = 1
-      ExplicitHeight = 66
     end
     object btFinalizar: TPanel
       Left = 391
@@ -83,9 +80,6 @@ object fConsultarPedidos: TfConsultarPedidos
       ParentFont = False
       TabOrder = 1
       OnClick = Finalizar
-      ExplicitLeft = 390
-      ExplicitTop = 1
-      ExplicitHeight = 66
     end
     object btAlterar: TPanel
       Left = 323
@@ -105,9 +99,6 @@ object fConsultarPedidos: TfConsultarPedidos
       ParentFont = False
       TabOrder = 2
       OnClick = Alterar
-      ExplicitLeft = 322
-      ExplicitTop = 1
-      ExplicitHeight = 66
     end
     object btNovo: TPanel
       Left = 255
@@ -127,9 +118,6 @@ object fConsultarPedidos: TfConsultarPedidos
       ParentFont = False
       TabOrder = 3
       OnClick = Novo
-      ExplicitLeft = 254
-      ExplicitTop = 1
-      ExplicitHeight = 66
     end
     object btExcluir: TPanel
       Left = 459
@@ -149,67 +137,69 @@ object fConsultarPedidos: TfConsultarPedidos
       ParentFont = False
       TabOrder = 4
       OnClick = Excluir
-      ExplicitLeft = 458
-      ExplicitTop = 1
-      ExplicitHeight = 66
     end
   end
   object pnFiltros: TPanel
     Left = 0
-    Top = 68
+    Top = 90
     Width = 595
-    Height = 141
+    Height = 121
     Align = alTop
     BevelOuter = bvNone
+    Enabled = False
     TabOrder = 2
-    ExplicitTop = 62
+    ExplicitTop = 88
+    DesignSize = (
+      595
+      121)
     object lbFiltroDataInicial: TLabel
       Left = 14
-      Top = 33
+      Top = 9
       Width = 55
       Height = 13
       Caption = 'Data inicial:'
     end
     object lbFiltroDataFinal: TLabel
       Left = 14
-      Top = 73
+      Top = 49
       Width = 50
       Height = 13
       Caption = 'Data final:'
     end
     object lbFiltroCliente: TLabel
       Left = 126
-      Top = 33
+      Top = 9
       Width = 37
       Height = 13
       Caption = 'Cliente:'
     end
     object lbFiltroSituacao: TLabel
       Left = 126
-      Top = 73
+      Top = 49
       Width = 45
       Height = 13
       Caption = 'Situa'#231#227'o:'
     end
     object lbFiltroTipo: TLabel
       Left = 314
-      Top = 33
+      Top = 9
       Width = 24
       Height = 13
       Caption = 'Tipo:'
     end
-    object checkAtivarFiltros: TCheckBox
-      Left = 14
-      Top = 6
-      Width = 97
-      Height = 17
-      Caption = 'Ativar filtros'
-      TabOrder = 0
-      OnClick = checkAtivarFiltrosClick
-    end
     object edFiltroDataInicial: TMaskEdit
       Left = 14
-      Top = 48
+      Top = 24
+      Width = 65
+      Height = 21
+      EditMask = '!99/99/0000;1;_'
+      MaxLength = 10
+      TabOrder = 0
+      Text = '  /  /    '
+    end
+    object edFiltroDataFinal: TMaskEdit
+      Left = 14
+      Top = 64
       Width = 65
       Height = 21
       EditMask = '!99/99/0000;1;_'
@@ -217,29 +207,19 @@ object fConsultarPedidos: TfConsultarPedidos
       TabOrder = 1
       Text = '  /  /    '
     end
-    object edFiltroDataFinal: TMaskEdit
-      Left = 14
-      Top = 88
-      Width = 65
-      Height = 21
-      EditMask = '!99/99/0000;1;_'
-      MaxLength = 10
-      TabOrder = 2
-      Text = '  /  /    '
-    end
     object cbFiltroCliente: TComboBox
       Left = 126
-      Top = 48
+      Top = 24
       Width = 145
       Height = 21
-      TabOrder = 3
+      TabOrder = 2
     end
     object cbFiltroSituacao: TComboBox
       Left = 126
-      Top = 88
+      Top = 64
       Width = 145
       Height = 21
-      TabOrder = 4
+      TabOrder = 3
       TextHint = 'Cliente'
       Items.Strings = (
         'Pendente'
@@ -247,16 +227,44 @@ object fConsultarPedidos: TfConsultarPedidos
     end
     object cbFiltroTipo: TComboBox
       Left = 314
-      Top = 48
+      Top = 24
       Width = 145
       Height = 21
-      TabOrder = 5
+      TabOrder = 4
       TextHint = 'Cliente'
       Items.Strings = (
         'Venda'
         'Bonifica'#231#227'o'
         'Troca')
     end
+    object btFiltroFiltrar: TButton
+      Left = 488
+      Top = 90
+      Width = 97
+      Height = 25
+      Anchors = [akRight, akBottom]
+      Caption = 'Filtrar'
+      TabOrder = 5
+      OnClick = btFiltroFiltrarClick
+      ExplicitTop = 110
+    end
+  end
+  object cbHabilitarFiltros: TCheckBox
+    AlignWithMargins = True
+    Left = 15
+    Top = 73
+    Width = 580
+    Height = 17
+    Margins.Left = 15
+    Margins.Top = 5
+    Margins.Right = 0
+    Margins.Bottom = 0
+    Align = alTop
+    Caption = 'Habilitar filtros'
+    TabOrder = 3
+    OnClick = cbHabilitarFiltrosClick
+    ExplicitLeft = 10
+    ExplicitTop = 70
   end
   object queryPedidos: TFDQuery
     Connection = fDados.FDConnection1

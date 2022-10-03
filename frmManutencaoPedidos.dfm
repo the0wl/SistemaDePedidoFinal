@@ -1,9 +1,11 @@
 object fCadastrarPedidos: TfCadastrarPedidos
   Left = 0
   Top = 0
+  BorderIcons = []
+  BorderStyle = bsSingle
   Caption = 'Cadastro de pedidos'
-  ClientHeight = 353
-  ClientWidth = 727
+  ClientHeight = 363
+  ClientWidth = 737
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,13 +20,13 @@ object fCadastrarPedidos: TfCadastrarPedidos
   object pnMenu: TPanel
     Left = 0
     Top = 0
-    Width = 727
+    Width = 737
     Height = 68
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
     object Panel3: TPanel
-      Left = 659
+      Left = 669
       Top = 0
       Width = 68
       Height = 68
@@ -43,7 +45,7 @@ object fCadastrarPedidos: TfCadastrarPedidos
       OnClick = Sair
     end
     object Panel6: TPanel
-      Left = 591
+      Left = 601
       Top = 0
       Width = 68
       Height = 68
@@ -65,7 +67,7 @@ object fCadastrarPedidos: TfCadastrarPedidos
   object pnDadosBase: TPanel
     Left = 0
     Top = 68
-    Width = 727
+    Width = 737
     Height = 174
     Align = alTop
     BevelOuter = bvNone
@@ -267,7 +269,7 @@ object fCadastrarPedidos: TfCadastrarPedidos
     AlignWithMargins = True
     Left = 0
     Top = 248
-    Width = 727
+    Width = 737
     Height = 30
     Margins.Left = 0
     Margins.Top = 6
@@ -277,7 +279,7 @@ object fCadastrarPedidos: TfCadastrarPedidos
     BevelOuter = bvNone
     TabOrder = 2
     object btExcluirItem: TPanel
-      Left = 632
+      Left = 642
       Top = 0
       Width = 95
       Height = 30
@@ -296,7 +298,7 @@ object fCadastrarPedidos: TfCadastrarPedidos
       OnClick = Excluir
     end
     object btNovoItem: TPanel
-      Left = 442
+      Left = 452
       Top = 0
       Width = 95
       Height = 30
@@ -315,7 +317,7 @@ object fCadastrarPedidos: TfCadastrarPedidos
       OnClick = Novo
     end
     object btAlterarItem: TPanel
-      Left = 537
+      Left = 547
       Top = 0
       Width = 95
       Height = 30
@@ -337,8 +339,8 @@ object fCadastrarPedidos: TfCadastrarPedidos
   object gdListaItens: TStringGrid
     Left = 0
     Top = 284
-    Width = 727
-    Height = 69
+    Width = 737
+    Height = 79
     Align = alClient
     ColCount = 7
     FixedCols = 0
